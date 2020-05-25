@@ -29,7 +29,7 @@ func poetryProc() {
 	log.Info("Found 'pyproject.toml'. Creating virtual environment using 'Poetry'.")
 
 	// Make sure .venv will be in project
-	if !fileExists("Pipfile") {
+	if !fileExists("poetry.toml") {
 		cmd := exec.Command("poetry", "config", "--local", "virtualenvs.in-project", "true")
 		out, err := cmd.CombinedOutput()
 		if err != nil {
