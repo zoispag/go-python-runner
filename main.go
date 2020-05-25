@@ -1,11 +1,10 @@
 package main
 
 import (
-	"fmt"
 	"os"
-	"os/exec"
 
 	log "github.com/sirupsen/logrus"
+	python "github.com/zoispag/go-python-runner/python"
 )
 
 func init() {
@@ -15,16 +14,8 @@ func init() {
 }
 
 func main() {
-	// cleanup virtual env
-	os.RemoveAll("./.venv")
+	python.CleanUpVirtualEnv()
+	python.SetupVirtualEnv()
 
-	setupVirtualEnv()
-
-	// run python job
-	cmd := exec.Command("./.venv/bin/python", "script.py")
-	out, err := cmd.CombinedOutput()
-	if err != nil {
-		log.Error(fmt.Sprintf("%s", err.Error()))
-	}
-	log.Info(string(out))
+	python.ExecutePython("script.py")
 }

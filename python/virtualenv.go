@@ -1,4 +1,4 @@
-package main
+package python
 
 import (
 	"fmt"
@@ -8,7 +8,14 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-func setupVirtualEnv() {
+// CleanUpVirtualEnv Cleans up a virtual env by deleting .venv/ dir
+func CleanUpVirtualEnv() {
+	// cleanup virtual env
+	os.RemoveAll("./.venv")
+}
+
+// SetupVirtualEnv Creates a virtual environment using Poetry, pipenv or pip/venv
+func SetupVirtualEnv() {
 	if fileExists("pyproject.toml") {
 		poetryProc()
 	} else if fileExists("Pipfile") {
