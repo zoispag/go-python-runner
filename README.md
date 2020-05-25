@@ -27,6 +27,12 @@ go mod verify
 go run .
 ```
 
+#### with Debug mode:
+
+```bash
+GO_DEBUG_MODE=on go run main.go
+```
+
 ## To build as a binary:
 
 ```bash
