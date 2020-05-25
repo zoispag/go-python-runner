@@ -26,11 +26,8 @@ func CleanUpVirtualEnv() {
 // SetupVirtualEnv Creates a virtual environment using Poetry, PyFlow, pipenv or pip/venv
 func SetupVirtualEnv() {
 	if fileExists("pyproject.toml") {
-		if isPoetry() {
-			poetryProc()
-		} else if isPyFlow() {
-			pyflowProc()
-		}
+		// Poetry or PyFlow
+		pep518Proc()
 	} else if fileExists("Pipfile") {
 		pipenvProc()
 	} else if fileExists("requirements.txt") {

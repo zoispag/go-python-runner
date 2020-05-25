@@ -5,6 +5,16 @@ import (
 	"strings"
 )
 
+func pep518Proc() {
+	tomlContent := readPyProjectToml()
+
+	if isPoetry(tomlContent) {
+		poetryProc()
+	} else if isPyFlow(tomlContent) {
+		pyflowProc()
+	}
+}
+
 func readPyProjectToml() string {
 	// read the whole file at once
 	b, err := ioutil.ReadFile("pyproject.toml")
@@ -15,10 +25,10 @@ func readPyProjectToml() string {
 	return string(b)
 }
 
-func isPoetry() bool {
-	return strings.Contains(readPyProjectToml(), "tool.poetry")
+func isPoetry(tomlContent string) bool {
+	return strings.Contains(tomlContent, "tool.poetry")
 }
 
-func isPyFlow() bool {
-	return strings.Contains(readPyProjectToml(), "tool.pyflow")
+func isPyFlow(tomlContent string) bool {
+	return strings.Contains(tomlContent, "tool.pyflow")
 }

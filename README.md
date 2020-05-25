@@ -4,8 +4,9 @@ This is a Proof of Concect to demonstrate how to run a python script in an isola
 It will install dependecies, using one of the following package managers with the following order:
 
 1. Poetry (using `pyproject.toml`)
-2. pipenv (using `Pipfile`)
-3. pip & venv (using `requirements.txt`)
+2. PyFlow (using `pyproject.toml`)
+3. pipenv (using `Pipfile`)
+4. pip & venv (using `requirements.txt`)
 
 ## To install:
 
@@ -19,6 +20,7 @@ go mod verify
 ### Python package managers
 
 - [Poetry](https://python-poetry.org/docs/#installation)
+- [PyFlow](https://github.com/David-OConnor/pyflow#installation)
 - [pipenv](https://pipenv-fork.readthedocs.io/en/latest/install.html)
 
 ## To run:
