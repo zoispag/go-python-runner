@@ -24,5 +24,17 @@ go mod verify
 ## To run:
 
 ```bash
-go run main.go
+go run .
+```
+
+## To build as a binary:
+
+```bash
+go build .
+```
+
+and execute the produced binary with
+
+```bash
+./go-python-runner
 ```
