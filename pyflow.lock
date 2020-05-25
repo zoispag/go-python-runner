@@ -1,0 +1,29 @@
+[[package]]
+id = 1
+name = "pendulum"
+version = "2.1.0"
+source = "pypi+https://pypi.org/pypi/pendulum/2.1.0/json"
+dependencies = ["python-dateutil 2.8.1 pypi+https://pypi.org/pypi/python-dateutil/2.8.1/json", "pytzdata 2019.3.0 pypi+https://pypi.org/pypi/pytzdata/2019.3.0/json"]
+
+[[package]]
+id = 3
+name = "python-dateutil"
+version = "2.8.1"
+source = "pypi+https://pypi.org/pypi/python-dateutil/2.8.1/json"
+dependencies = ["six 1.15.0 pypi+https://pypi.org/pypi/six/1.15.0/json"]
+
+[[package]]
+id = 4
+name = "six"
+version = "1.15.0"
+source = "pypi+https://pypi.org/pypi/six/1.15.0/json"
+dependencies = []
+
+[[package]]
+id = 2
+name = "pytzdata"
+version = "2019.3.0"
+source = "pypi+https://pypi.org/pypi/pytzdata/2019.3.0/json"
+dependencies = []
+
+[metadata]
