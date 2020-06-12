@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 
 	log "github.com/sirupsen/logrus"
@@ -22,5 +23,10 @@ func main() {
 	python.CleanUpVirtualEnv()
 	python.SetupVirtualEnv()
 
-	python.ExecutePython("script.py")
+	out, err := python.ExecutePython("script.py")
+
+	if err != nil {
+		log.Error(fmt.Sprintf("Job resulted in error: %s", err.Error()))
+	}
+	log.Info(string(out))
 }
