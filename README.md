@@ -36,6 +36,24 @@ out, err := python.ExecutePython("script.py")
 
 This will run a python script called `script.py` inside the virtual environment, using the proper command, analyzing files existence.
 
+Alternatively, it is possible to get an instance for `*exec.Cmd` which can be handled independently.
+
+```go
+	cmd := python.GetPythonRunCommand("script.py")
+	out, err := cmd.CombinedOutput()
+```
+or
+```go
+	cmd := python.GetPythonRunCommand("script.py")
+	err := cmd.Run()
+```
+or
+```go
+	cmd := python.GetPythonRunCommand("script.py")
+	err := cmd.Start()
+	err = cmd.Wait()
+```
+
 #### Complete example
 
 ```go

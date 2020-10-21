@@ -23,8 +23,8 @@ func main() {
 	python.CleanUpVirtualEnv()
 	python.SetupVirtualEnv()
 
-	out, err := python.ExecutePython("script.py")
-
+	cmd := python.GetPythonRunCommand("script.py")
+	out, err := cmd.CombinedOutput()
 	if err != nil {
 		log.Error(fmt.Sprintf("Job resulted in error: %s", err.Error()))
 	}
