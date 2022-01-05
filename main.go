@@ -20,10 +20,14 @@ func init() {
 }
 
 func main() {
-	python.CleanUpVirtualEnv()
-	python.SetupVirtualEnv()
+	path, err := os.Getwd()
+	if err != nil {
+		log.Error(fmt.Sprintf("Job resulted in error: %s", err.Error()))
+	}
+	python.CleanUpVirtualEnv(path)
+	python.SetupVirtualEnv(path)
 
-	cmd := python.GetPythonRunCommand("script.py")
+	cmd := python.GetPythonRunCommand(path, "script.py")
 	out, err := cmd.CombinedOutput()
 	if err != nil {
 		log.Error(fmt.Sprintf("Job resulted in error: %s", err.Error()))

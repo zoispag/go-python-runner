@@ -3,11 +3,12 @@ package python
 import (
 	"fmt"
 	"os/exec"
+	"path/filepath"
 
 	log "github.com/sirupsen/logrus"
 )
 
-func pipProc() {
+func pipProc(path string) {
 	log.Info("Found 'requirements.txt'. Creating virtual environment using 'pip' & 'venv' module.")
 
 	var cmd *exec.Cmd
@@ -21,7 +22,7 @@ func pipProc() {
 	log.Debug(string(out))
 
 	// install dependencies
-	cmd = exec.Command("./.venv/bin/pip", "install", "-r", "requirements.txt")
+	cmd = exec.Command(filepath.Join(path, ".venv/bin/pip"), "install", "-r", "requirements.txt")
 	out, err = cmd.CombinedOutput()
 	if err != nil {
 		log.Error(fmt.Sprintf("%s", err.Error()))

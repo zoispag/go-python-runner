@@ -15,7 +15,7 @@ It will install dependecies, using one of the following package managers with th
 #### Create virtual environment
 
 ```go
-python.SetupVirtualEnv()
+python.SetupVirtualEnv("/path/to/python/script/")
 ```
 
 This will create a vitual enviroment given the existence of proper files (`pyproject.toml`, `Pipfile` or `requirements.txt`).
@@ -23,7 +23,7 @@ This will create a vitual enviroment given the existence of proper files (`pypro
 #### Cleanup virtual environment
 
 ```go
-python.CleanUpVirtualEnv()
+python.CleanUpVirtualEnv("/path/to/python/script/")
 ```
 
 This will delete the `.venv` directory if exists. In case of pyflow, it will also delete the `__pypackages__` directory.
@@ -31,7 +31,7 @@ This will delete the `.venv` directory if exists. In case of pyflow, it will als
 #### Run python script inside virtual environment
 
 ```go
-out, err := python.ExecutePython("script.py")
+out, err := python.ExecutePython("/path/to/python/script/", "/path/to/python/script/script.py")
 ```
 
 This will run a python script called `script.py` inside the virtual environment, using the proper command, analyzing files existence.
@@ -39,17 +39,17 @@ This will run a python script called `script.py` inside the virtual environment,
 Alternatively, it is possible to get an instance for `*exec.Cmd` which can be handled independently.
 
 ```go
-	cmd := python.GetPythonRunCommand("script.py")
+	cmd := python.GetPythonRunCommand("/path/to/python/script/", "/path/to/python/script/script.py")
 	out, err := cmd.CombinedOutput()
 ```
 or
 ```go
-	cmd := python.GetPythonRunCommand("script.py")
+	cmd := python.GetPythonRunCommand("/path/to/python/script/", "/path/to/python/script/script.py")
 	err := cmd.Run()
 ```
 or
 ```go
-	cmd := python.GetPythonRunCommand("script.py")
+	cmd := python.GetPythonRunCommand("/path/to/python/script/", "/path/to/python/script/script.py")
 	err := cmd.Start()
 	err = cmd.Wait()
 ```
@@ -67,9 +67,9 @@ import (
 )
 
 func main() {
-	python.SetupVirtualEnv()
+	python.SetupVirtualEnv("/path/to/python/script/")
 
-	out, err := python.ExecutePython("script.py")
+	out, err := python.ExecutePython("/path/to/python/script/", "/path/to/python/script/script.py")
 	if err != nil {
 		log.Error(fmt.Sprintf("Encountered error: %s", err.Error()))
 	}

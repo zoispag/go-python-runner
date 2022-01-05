@@ -2,11 +2,12 @@ package python
 
 import (
 	"io/ioutil"
+	"path/filepath"
 	"strings"
 )
 
-func pep518Proc() {
-	tomlContent := readPyProjectToml()
+func pep518Proc(path string) {
+	tomlContent := readPyProjectToml(path)
 
 	if isPoetry(tomlContent) {
 		poetryProc()
@@ -15,9 +16,9 @@ func pep518Proc() {
 	}
 }
 
-func readPyProjectToml() string {
+func readPyProjectToml(path string) string {
 	// read the whole file at once
-	b, err := ioutil.ReadFile("pyproject.toml")
+	b, err := ioutil.ReadFile(filepath.Join(path, "pyproject.toml"))
 	if err != nil {
 		panic(err)
 	}
