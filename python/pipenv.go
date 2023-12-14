@@ -8,7 +8,7 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-func pipenvProc() {
+func pipenvProc(path string) {
 	log.Info("Found 'Pipfile'. Creating virtual environment using 'pipenv'.")
 
 	// Make sure .venv will be in project
@@ -16,6 +16,7 @@ func pipenvProc() {
 
 	// install dependencies
 	cmd := exec.Command("pipenv", "install")
+	cmd.Dir = path
 	out, err := cmd.CombinedOutput()
 	if err != nil {
 		log.Error(fmt.Sprintf("%s", err.Error()))

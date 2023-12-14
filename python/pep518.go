@@ -10,9 +10,9 @@ func pep518Proc(path string) {
 	tomlContent := readPyProjectToml(path)
 
 	if isPoetry(tomlContent) {
-		poetryProc()
+		poetryProc(path)
 	} else if isPyFlow(tomlContent) {
-		pyflowProc()
+		pyflowProc(path)
 	}
 }
 

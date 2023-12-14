@@ -35,7 +35,7 @@ func SetupVirtualEnv(path string) {
 		// Poetry or PyFlow
 		pep518Proc(path)
 	} else if fileExists(filepath.Join(path, "Pipfile")) {
-		pipenvProc()
+		pipenvProc(path)
 	} else if fileExists(filepath.Join(path, "requirements.txt")) {
 		pipProc(path)
 	}
