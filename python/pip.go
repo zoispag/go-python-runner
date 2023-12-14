@@ -15,6 +15,7 @@ func pipProc(path string) {
 
 	// create virtual env
 	cmd = exec.Command("python3", "-m", "venv", ".venv")
+	cmd.Dir = path
 	out, err := cmd.CombinedOutput()
 	if err != nil {
 		log.Error(fmt.Sprintf("%s", err.Error()))
@@ -23,6 +24,7 @@ func pipProc(path string) {
 
 	// install dependencies
 	cmd = exec.Command(filepath.Join(path, ".venv/bin/pip"), "install", "-r", "requirements.txt")
+	cmd.Dir = path
 	out, err = cmd.CombinedOutput()
 	if err != nil {
 		log.Error(fmt.Sprintf("%s", err.Error()))
