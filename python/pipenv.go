@@ -1,7 +1,6 @@
 package python
 
 import (
-	"fmt"
 	"os"
 	"os/exec"
 
@@ -19,7 +18,7 @@ func pipenvProc(path string) {
 	cmd.Dir = path
 	out, err := cmd.CombinedOutput()
 	if err != nil {
-		log.Error(fmt.Sprintf("%s", err.Error()))
+		log.Error(err.Error())
 	}
 	log.Debug(string(out))
 }

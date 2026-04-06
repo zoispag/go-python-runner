@@ -1,13 +1,18 @@
 package python
 
 import (
-	"io/ioutil"
+	"os"
 	"path/filepath"
 	"strings"
+
+	log "github.com/sirupsen/logrus"
 )
 
 func pep518Proc(path string) {
 	tomlContent := readPyProjectToml(path)
+	if tomlContent == "" {
+		return
+	}
 
 	if isUv(path) {
 		uvProc(path)
@@ -17,12 +22,11 @@ func pep518Proc(path string) {
 }
 
 func readPyProjectToml(path string) string {
-	// read the whole file at once
-	b, err := ioutil.ReadFile(filepath.Join(path, "pyproject.toml"))
+	b, err := os.ReadFile(filepath.Join(path, "pyproject.toml"))
 	if err != nil {
-		panic(err)
+		log.Error(err.Error())
+		return ""
 	}
-
 	return string(b)
 }
 

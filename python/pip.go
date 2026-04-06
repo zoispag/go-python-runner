@@ -1,7 +1,6 @@
 package python
 
 import (
-	"fmt"
 	"os/exec"
 	"path/filepath"
 
@@ -11,14 +10,12 @@ import (
 func pipProc(path string) {
 	log.Info("Found 'requirements.txt'. Creating virtual environment using 'pip' & 'venv' module.")
 
-	var cmd *exec.Cmd
-
 	// create virtual env
-	cmd = exec.Command("python3", "-m", "venv", ".venv")
+	cmd := exec.Command("python3", "-m", "venv", ".venv")
 	cmd.Dir = path
 	out, err := cmd.CombinedOutput()
 	if err != nil {
-		log.Error(fmt.Sprintf("%s", err.Error()))
+		log.Error(err.Error())
 	}
 	log.Debug(string(out))
 
@@ -27,7 +24,7 @@ func pipProc(path string) {
 	cmd.Dir = path
 	out, err = cmd.CombinedOutput()
 	if err != nil {
-		log.Error(fmt.Sprintf("%s", err.Error()))
+		log.Error(err.Error())
 	}
 	log.Debug(string(out))
 }
