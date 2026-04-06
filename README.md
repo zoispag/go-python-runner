@@ -5,8 +5,8 @@
 It runs a python script in an isolated environment (virtual environment) via a go wrapper.
 It will install dependecies, using one of the following package managers with the following order:
 
-1. Poetry (using `pyproject.toml`)
-2. PyFlow (using `pyproject.toml`)
+1. uv (using `uv.lock` + `pyproject.toml`)
+2. Poetry (using `pyproject.toml`)
 3. pipenv (using `Pipfile`)
 4. pip & venv (using `requirements.txt`)
 
@@ -26,7 +26,7 @@ This will create a vitual enviroment given the existence of proper files (`pypro
 python.CleanUpVirtualEnv("/path/to/python/script/")
 ```
 
-This will delete the `.venv` directory if exists. In case of pyflow, it will also delete the `__pypackages__` directory.
+This will delete the `.venv` directory if exists.
 
 #### Run python script inside virtual environment
 
@@ -81,8 +81,8 @@ func main() {
 
 ### Python package managers
 
+- [uv](https://docs.astral.sh/uv/getting-started/installation/)
 - [Poetry](https://python-poetry.org/docs/#installation)
-- [PyFlow](https://github.com/David-OConnor/pyflow#installation)
 - [pipenv](https://pipenv-fork.readthedocs.io/en/latest/install.html)
 
 ### Contribute

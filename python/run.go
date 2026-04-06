@@ -6,9 +6,7 @@ import (
 )
 
 func getPythonCommand(path string) string {
-	if dirExists(filepath.Join(path, "./__pypackages__")) {
-		return "pyflow"
-	} else if dirExists(filepath.Join(path, "./.venv")) {
+	if dirExists(filepath.Join(path, "./.venv")) {
 		return filepath.Join(path, ".venv/bin/python")
 	} else {
 		return "python"

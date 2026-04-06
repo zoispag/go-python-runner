@@ -9,10 +9,10 @@ import (
 func pep518Proc(path string) {
 	tomlContent := readPyProjectToml(path)
 
-	if isPoetry(tomlContent) {
+	if isUv(path) {
+		uvProc(path)
+	} else if isPoetry(tomlContent) {
 		poetryProc(path)
-	} else if isPyFlow(tomlContent) {
-		pyflowProc(path)
 	}
 }
 
@@ -30,6 +30,6 @@ func isPoetry(tomlContent string) bool {
 	return strings.Contains(tomlContent, "tool.poetry")
 }
 
-func isPyFlow(tomlContent string) bool {
-	return strings.Contains(tomlContent, "tool.pyflow")
+func isUv(path string) bool {
+	return fileExists(filepath.Join(path, "uv.lock"))
 }

@@ -8,16 +8,9 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-// CleanUpVirtualEnv Cleans up a virtual env by deleting .venv/ and __pypackages__/ dirs
+// CleanUpVirtualEnv Cleans up a virtual env by deleting .venv/ dir
 func CleanUpVirtualEnv(path string) {
 	log.Info(fmt.Sprintf("Teardown: Current working directory: %s", path))
-
-	// cleanup __pypackages__ dir
-	if dirExists(filepath.Join(path, "./__pypackages__")) {
-		log.Debug("Deleting '__pypackages__/' directory")
-
-		os.RemoveAll(filepath.Join(path, "./__pypackages__"))
-	}
 
 	// cleanup virtual env
 	if dirExists(filepath.Join(path, "./.venv")) {
@@ -27,12 +20,12 @@ func CleanUpVirtualEnv(path string) {
 	}
 }
 
-// SetupVirtualEnv Creates a virtual environment using Poetry, PyFlow, pipenv or pip/venv
+// SetupVirtualEnv Creates a virtual environment using uv, Poetry, pipenv or pip/venv
 func SetupVirtualEnv(path string) {
 	log.Info(fmt.Sprintf("Setup: Current working directory: %s", path))
 
 	if fileExists(filepath.Join(path, "pyproject.toml")) {
-		// Poetry or PyFlow
+		// uv or Poetry
 		pep518Proc(path)
 	} else if fileExists(filepath.Join(path, "Pipfile")) {
 		pipenvProc(path)

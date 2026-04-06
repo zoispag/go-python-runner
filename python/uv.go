@@ -7,11 +7,11 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-func pyflowProc(path string) {
-	log.Info("Found 'pyproject.toml'. Creating virtual environment using 'PyFlow'.")
+func uvProc(path string) {
+	log.Info("Found 'uv.lock'. Creating virtual environment using 'uv'.")
 
 	// install dependencies
-	cmd := exec.Command("pyflow", "install")
+	cmd := exec.Command("uv", "sync")
 	cmd.Dir = path
 	out, err := cmd.CombinedOutput()
 	if err != nil {
