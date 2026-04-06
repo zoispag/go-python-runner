@@ -9,6 +9,7 @@ import (
 func uvProc(path string) {
 	log.Info("Found 'uv.lock'. Creating virtual environment using 'uv'.")
 
+	// install dependencies
 	cmd := exec.Command("uv", "sync")
 	cmd.Dir = path
 	out, err := cmd.CombinedOutput()

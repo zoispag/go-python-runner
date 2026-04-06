@@ -10,6 +10,7 @@ import (
 func poetryProc(path string) {
 	log.Info("Found 'pyproject.toml'. Creating virtual environment using 'Poetry'.")
 
+	// Make sure .venv will be in project
 	if !fileExists(filepath.Join(path, "poetry.toml")) {
 		cmd := exec.Command("poetry", "config", "--local", "virtualenvs.in-project", "true")
 		cmd.Dir = path
@@ -20,6 +21,7 @@ func poetryProc(path string) {
 		log.Debug(string(out))
 	}
 
+	// install dependencies
 	cmd := exec.Command("poetry", "install")
 	cmd.Dir = path
 	out, err := cmd.CombinedOutput()
