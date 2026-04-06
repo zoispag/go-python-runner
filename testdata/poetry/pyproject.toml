@@ -1,0 +1,13 @@
+[tool.poetry]
+name = "go-python-runner-testdata-poetry"
+version = "0.1.0"
+description = "go-python-runner poetry e2e test fixture"
+authors = []
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pendulum = "^3.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

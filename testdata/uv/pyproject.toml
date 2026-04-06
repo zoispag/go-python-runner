@@ -1,0 +1,8 @@
+[project]
+name = "go-python-runner-testdata-uv"
+version = "0.1.0"
+description = "go-python-runner uv e2e test fixture"
+requires-python = ">=3.12"
+dependencies = [
+    "pendulum>=3.2.0",
+]

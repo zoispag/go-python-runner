@@ -12,7 +12,6 @@ Module path: `github.com/zoispag/go-python-runner`
 
 ```
 go-python-runner/
-├── main.go               # Demo entry point (runs script.py in CWD)
 ├── python/               # Core library package
 │   ├── virtualenv.go     # Public API: SetupVirtualEnv, CleanUpVirtualEnv
 │   ├── run.go            # Public API: GetPythonRunCommand, ExecutePython
@@ -21,7 +20,16 @@ go-python-runner/
 │   ├── poetry.go         # Poetry handler: runs `poetry install`
 │   ├── pipenv.go         # pipenv handler: runs `pipenv install`
 │   ├── pip.go            # pip+venv handler: creates venv and pip installs
-│   └── utility.go        # fileExists() and dirExists() helpers
+│   ├── utility.go        # fileExists() and dirExists() helpers
+│   └── e2e_test.go       # E2E tests (one per package manager)
+├── testdata/             # E2E test fixtures (one subdir per package manager)
+│   ├── uv/               # uv fixture: pyproject.toml, uv.lock, script.py
+│   ├── poetry/           # Poetry fixture: pyproject.toml, poetry.lock, poetry.toml, script.py
+│   ├── pipenv/           # pipenv fixture: Pipfile, Pipfile.lock, script.py
+│   └── pip/              # pip fixture: requirements.txt, script.py
+├── .github/workflows/
+│   ├── codeql-analysis.yml
+│   └── test.yml          # E2E CI: matrix over uv/poetry/pipenv/pip
 ├── go.mod
 └── go.sum
 ```
@@ -74,14 +82,15 @@ func xyzProc(path string) {
 
 Errors are logged via `log.Error`, not returned. This is the established convention — do not change handlers to return errors.
 
-## Build & Run Commands
+## Build, Test & Run Commands
 
 ```bash
-go build ./...          # Build
-go vet ./...            # Vet
-go run .                # Run demo (uses CWD as Python project path)
-GO_DEBUG_MODE=on go run main.go  # Run with debug logging
+go build ./...                              # Build
+go vet ./...                                # Vet
+go test -v -timeout 120s ./python/          # Run all E2E tests
 ```
+
+The E2E tests in `python/e2e_test.go` copy each `testdata/<pm>/` fixture into a temp directory, call `SetupVirtualEnv`, run `script.py` via `ExecutePython`, assert an ISO 8601 timestamp is printed, then call `CleanUpVirtualEnv`. Each test skips automatically if the required tool is not on `PATH`.
 
 ## Conventions
 
