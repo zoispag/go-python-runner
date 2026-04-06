@@ -32,7 +32,7 @@ jobs:
 
       - name: Install uv
         if: matrix.pm == 'uv'
-        uses: astral-sh/setup-uv@v8
+        uses: astral-sh/setup-uv@v8.0.0
 
       - name: Install Poetry
         if: matrix.pm == 'poetry'
